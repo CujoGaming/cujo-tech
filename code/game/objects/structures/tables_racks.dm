@@ -280,10 +280,11 @@
 	// Continue to placing if we don't do anything else
 	if(.)
 		return .
-
+	//if operating table, do not place on table
+	if(src.type == /obj/structure/table/optable)
+		return NONE
 	if(!(user.istate & ISTATE_HARM) || (tool.item_flags & NOBLUDGEON))
 		return table_place_act(user, tool, modifiers)
-
 	return NONE
 
 /obj/structure/table/proc/tray_act(mob/living/user, obj/item/storage/bag/tray/used_tray)
