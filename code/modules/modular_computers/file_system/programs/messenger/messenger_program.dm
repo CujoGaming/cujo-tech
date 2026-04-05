@@ -713,7 +713,7 @@
 		if(!messaged_mob.can_hear() || (HAS_TRAIT(messaged_mob, TRAIT_HARD_OF_HEARING) && rand(0, 3) != 0))
 			to_chat(messaged_mob, span_infoplain("You feel your PDA vibrate."))
 		else
-			to_chat(messaged_mob, span_infoplain("[icon2html(computer, messaged_mob)] <b>PDA message from [sender_title], </b>"[inbound_message]"[photo_message] [reply]"))
+			to_chat(messaged_mob, span_infoplain("[icon2html(computer, messaged_mob)] <b>PDA message from [sender_title], </b>\"[inbound_message]\"[photo_message] [reply]"))
 			ring_receievers += messaged_mob
 
 	if (alert_able && (!alert_silenced || is_rigged))
