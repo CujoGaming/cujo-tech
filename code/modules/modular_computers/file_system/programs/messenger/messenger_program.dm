@@ -677,7 +677,6 @@
 			viewing_messages_of = REF(chat)
 
 	var/list/mob/living/receievers = list()
-	var/list/mob/living/ring_receievers = list()
 	if(computer.inserted_pai)
 		receievers += computer.inserted_pai.pai
 	if(computer.loc && isliving(computer.loc))
@@ -710,14 +709,17 @@
 		inbound_message = emoji_parse(inbound_message)
 
 		var/photo_message = signal.data["photo"] ? " (<a href='byond://?src=[REF(src)];choice=[photo_href];skiprefresh=1;target=[REF(chat)]'>Photo Attached</a>)" : ""
+//Check if the mob can hear or has hard of hearing and rolls a 25% chance to receive the message
+		var/list/ignored_mobs = list()
 		if(!messaged_mob.can_hear() || (HAS_TRAIT(messaged_mob, TRAIT_HARD_OF_HEARING) && rand(0, 3) != 0))
 			to_chat(messaged_mob, span_infoplain("You feel your PDA vibrate."))
+			receievers -= messaged_mob
+			ignored_mobs += messaged_mob
 		else
 			to_chat(messaged_mob, span_infoplain("[icon2html(computer, messaged_mob)] <b>PDA message from [sender_title], </b>\"[inbound_message]\"[photo_message] [reply]"))
-			ring_receievers += messaged_mob
 
 	if (alert_able && (!alert_silenced || is_rigged))
-		computer.ring(ringtone, ring_receievers)
+		computer.ring(ringtone, receievers)
 
 	if(computer.active_program == src)
 		SStgui.update_uis(computer)
