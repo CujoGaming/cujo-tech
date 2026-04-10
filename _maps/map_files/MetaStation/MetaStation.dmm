@@ -26924,6 +26924,9 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 4
 	},
+/obj/item/reagent_containers/spray/cleaner{
+	pixel_y = 18
+}
 /obj/item/clothing/glasses/hud/health{
 	pixel_y = 6
 	},
