@@ -92,6 +92,20 @@
 	list_reagents = list(/datum/reagent/medicine/c2/synthflesh = 60)
 	custom_price = PAYCHECK_CREW * 5
 
+/obj/item/reagent_containers/medigel/synthflesh/examine(mob/user)
+	. = ..()
+	if(reagents.total_volume >= 60)
+		. += span_info("One full bottle can restore a corpse husked by burns.")
+
+/obj/item/reagent_containers/medigel/synthflesh/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(iscarbon(interacting_with) && reagents?.total_volume)
+		var/mob/living/carbon/carbies = interacting_with
+		if(HAS_TRAIT_FROM(carbies, TRAIT_HUSK, BURN) && carbies.getFireLoss() > UNHUSK_DAMAGE_THRESHOLD * 2.5)
+			// give them a warning if the mob is a husk but synthflesh won't unhusk yet
+			carbies.visible_message(span_boldwarning("[carbies]'s burns need to be repaired first before synthflesh will unhusk it!"))
+
+	return ..()
+
 /obj/item/reagent_containers/medigel/sterilizine
 	name = "sterilizer gel"
 	desc = "gel bottle loaded with non-toxic sterilizer. Useful in preparation for surgery."

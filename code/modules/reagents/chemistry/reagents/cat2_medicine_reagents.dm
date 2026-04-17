@@ -490,6 +490,9 @@
 	if(synthflesh_amount >= SYNTHFLESH_UNHUSK_AMOUNT)
 		carbies.cure_husk(BURN)
 		carbies.visible_message(span_nicegreen("A rubbery liquid coats [carbies]'s burns. [carbies] looks a lot healthier!")) //we're avoiding using the phrases "burnt flesh" and "burnt skin" here because carbies could be a skeleton or a golem or something
+	if((methods & PATCH) && synthflesh_amount >= 60)
+		carbies.cure_husk(BURN)
+		carbies.visible_message(span_nicegreen("A rubbery liquid coats [carbies]'s burns. [carbies] looks a lot healthier!"))
 
 /******ORGAN HEALING******/
 /*Suffix: -rite*/
