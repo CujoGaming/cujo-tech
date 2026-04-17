@@ -487,12 +487,9 @@
 	var/synthflesh_amount = carbies.reagents.get_reagent_amount(/datum/reagent/medicine/c2/synthflesh) // Yes, this includes the amount we've added from our gel
 	if(methods & TOUCH) //touch does not apply chems to blood, we want to combine the two volumes before attempting to unhusk
 		synthflesh_amount += reac_volume
-	if(synthflesh_amount >= SYNTHFLESH_UNHUSK_AMOUNT)
+	if((synthflesh_amount >= SYNTHFLESH_UNHUSK_AMOUNT) || ((methods & VAPOR) && synthflesh_amount >= 60))
 		carbies.cure_husk(BURN)
 		carbies.visible_message(span_nicegreen("A rubbery liquid coats [carbies]'s burns. [carbies] looks a lot healthier!")) //we're avoiding using the phrases "burnt flesh" and "burnt skin" here because carbies could be a skeleton or a golem or something
-	if((methods & PATCH) && synthflesh_amount >= 60)
-		carbies.cure_husk(BURN)
-		carbies.visible_message(span_nicegreen("A rubbery liquid coats [carbies]'s burns. [carbies] looks a lot healthier!"))
 
 /******ORGAN HEALING******/
 /*Suffix: -rite*/

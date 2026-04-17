@@ -16,11 +16,11 @@
 	throw_speed = 3
 	throw_range = 7
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(5,10)
+	possible_transfer_amounts = list(5,10,60)
 	volume = 60
 	var/can_fill_from_container = TRUE
-	var/apply_type = PATCH
-	var/apply_method = "spray" //the thick gel is sprayed and then dries into patch like film.
+	var/apply_type = VAPOR
+	var/apply_method = "spray" //the reagents are sprayed on
 	var/self_delay = 30
 	custom_price = PAYCHECK_CREW * 2
 	unique_reskin = list(
