@@ -315,8 +315,9 @@
 	return TRUE
 
 /obj/item/modular_computer/mouse_drop_dragged(atom/over_object, mob/user)
-	if(!istype(over_object, /atom/movable/screen))
-		return attack_self(user)
+	if(!isobserver(user))
+		if(!istype(over_object, /atom/movable/screen))
+			return attack_self(user)
 
 /obj/item/modular_computer/attack_ai(mob/user)
 	return attack_self(user)
